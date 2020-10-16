@@ -9,7 +9,7 @@ import { firestore, convertCollectionsSnapshotToMap } from "../../firebase/fireb
 
 import { updateCollections } from "../../redux/shop/shop.actions";
 
-import WithSpinner from "../../components/with-spinne/with-spinner.component";
+import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
 const CollectionsOwverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
