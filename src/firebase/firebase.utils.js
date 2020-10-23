@@ -13,7 +13,9 @@ const config = {
   measurementId: "G-N5G2G6514R",
 };
 
-export const creatUserProfileDocument = async (userAuth, additionalData) => {
+firebase.initializeApp(config);
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -23,7 +25,6 @@ export const creatUserProfileDocument = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
     try {
       await userRef.set({
         displayName,
@@ -32,9 +33,10 @@ export const creatUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData,
       });
     } catch (error) {
-      console.log("Error creating user", error.message);
+      console.log("error creating user", error.message);
     }
   }
+
   return userRef;
 };
 
@@ -67,8 +69,6 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     return accumulator;
   }, {});
 };
-
-firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
